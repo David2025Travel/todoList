@@ -1,0 +1,49 @@
+<mat-toolbar color="primary">
+  <span class="spacer"></span>
+  <h1>{{ username }}'s todoList</h1>
+  <span class="spacer"></span>
+  <mat-icon
+    matBadge="{{ countIncompleteTask }}"
+    matBadgeOverlap="true"
+    color="accent"
+    >checklist</mat-icon
+  >
+  <span class="spacer"></span>
+</mat-toolbar>
+
+<div class="addTask">
+  <mat-form-field appearance="outline" style="width: 350px">
+    <mat-label class="textFont">Task</mat-label>
+    <input type="text" required [(ngModel)] ="task" class="textFont" matInput placeholder="Enter task" />
+  </mat-form-field>
+  <button mat-raised-button color="accent" (click)="addTask()">Add</button>
+</div>
+
+<div class="container">
+  <table mat-table [dataSource]="items" class="mat-elevation-z3 fullWidth">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>#</th>
+      <td mat-cell *matCellDef="let i = index">{{ i + 1 }}</td>
+    </ng-container>
+    <ng-container matColumnDef="task">
+      <th mat-header-cell *matHeaderCellDef>Task</th>
+      <td mat-cell *matCellDef="let item">{{ item.task }}</td>
+    </ng-container>
+    <ng-container matColumnDef="complete">
+      <th mat-header-cell *matHeaderCellDef>Complete</th>
+      <td mat-cell *matCellDef="let item">
+        <mat-checkbox (change)="putComplete($event.checked, item.id)"  [(ngModel)] ="item.complete" color="primary">
+          {{ item.complete }}
+        </mat-checkbox>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="['id', 'task', 'complete']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['id', 'task', 'complete']"></tr>
+  </table>
+  <div class="toggle-container">
+    <mat-slide-toggle (change)="showCompleteTask =$event.checked">
+          Show complete task
+    </mat-slide-toggle>
+  </div>
+</div>
+
