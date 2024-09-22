@@ -3,7 +3,7 @@
   <h1>{{ username }}'s todoList</h1>
   <span class="spacer"></span>
   <mat-icon
-    matBadge="{{ countIncompleteTask }}"
+    matBadge="{{ countIncompleteTask() }}"
     matBadgeOverlap="true"
     color="accent"
     >checklist</mat-icon
@@ -14,7 +14,7 @@
 <div class="addTask">
   <mat-form-field appearance="outline" style="width: 350px">
     <mat-label class="textFont">Task</mat-label>
-    <input type="text" required [(ngModel)] ="task" class="textFont" matInput placeholder="Enter task" />
+    <input type="text" required [(ngModel)] ="task" [ngModelOptions]="{updateOn: 'blur'}" class="textFont" matInput placeholder="Enter task" />
   </mat-form-field>
   <button mat-raised-button color="accent" (click)="addTask()">Add</button>
 </div>
