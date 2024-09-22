@@ -8,6 +8,7 @@ import { TodoItem } from './model/todo-item';
 })
 export class AppComponent {
   
+  username = "David";
   count = 1;
   countIncompleteTask = signal<number>(0);
   task = "";
@@ -17,10 +18,6 @@ export class AppComponent {
   constructor(){
     this.todoItemsMap = new Map<number, TodoItem>();
   }
-
-  get username() : String {
-    console.log("get username");
-    return "David"};
 
   addTask(){
     console.clear();
@@ -33,7 +30,7 @@ export class AppComponent {
 
   /*
   la detection au changement peut etre appliqué ici pour eviter
-  une lecture inutu
+  une lecture 
   */
 
   putComplete(complete : boolean, id : number){
@@ -47,7 +44,7 @@ export class AppComponent {
       });
   }
 
-  get items() : readonly TodoItem[]{
+  get items() : readonly  TodoItem[]{
       console.log("get items");
       
       if(this.showCompleteTask) return Array.from(this.todoItemsMap.values());
